@@ -1,5 +1,4 @@
-import { Address } from '../pages/checkout/AddressForm';
-import { Card } from '../pages/checkout/PaymentForm';
+import { Address, Card } from '../pages/CheckoutPage';
 
 /**
  * Generates a unique email address for testing purposes

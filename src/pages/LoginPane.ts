@@ -1,5 +1,11 @@
 import { Page, Locator, expect } from '@playwright/test';
 
+/**
+ * LoginPane - Login modal interactions
+ * 
+ * Handles:
+ * - Sign up link navigation
+ */
 export class LoginPane {
   readonly page: Page;
   readonly signUpLink: Locator;

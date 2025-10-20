@@ -1,5 +1,12 @@
 import { Page, Locator, expect } from '@playwright/test';
 
+/**
+ * CartPane - Cart sidebar interactions
+ * 
+ * Handles:
+ * - Cart counter visibility
+ * - Proceeding to checkout
+ */
 export class CartPane {
   readonly page: Page;
   readonly counter: Locator;

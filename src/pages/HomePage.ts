@@ -1,20 +1,12 @@
 import { Page, Locator } from '@playwright/test';
 
 /**
- * Page Object Model for the Home Page functionality
+ * HomePage - Main page object for home page interactions
  * 
- * This class handles all interactions with the main home page including:
- * - Navigation to different sections (Shop All, Account menu)
- * - Banner and cookie consent handling
- * - Logo verification and page loading
- * 
- * @class HomePage
- * @example
- * ```typescript
- * const homePage = new HomePage(page);
- * await homePage.goto();
- * await homePage.navigateToShopAll();
- * ```
+ * Handles:
+ * - Account menu access
+ * - Navigation to Shop All
+ * - Logo verification
  */
 export class HomePage {
   readonly page: Page;

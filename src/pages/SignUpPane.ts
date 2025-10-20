@@ -1,21 +1,11 @@
 import { Page, Locator, expect } from '@playwright/test';
 
 /**
- * Page Object Model for the User Registration/Sign Up functionality
+ * SignUpPane - User registration modal interactions
  * 
- * This class handles all interactions with the user registration process including:
- * - Opening and closing the sign-up modal/panel
- * - Filling registration forms with user credentials
- * - Form validation and submission
- * - Navigation between login and sign-up forms
- * 
- * @class SignUpPane
- * @example
- * ```typescript
- * const signUpPane = new SignUpPane(page);
- * await signUpPane.fillSignUpForm('user@example.com', 'password123');
- * await signUpPane.submitSignUpForm();
- * ```
+ * Handles:
+ * - Sign up form filling
+ * - Form submission
  */
 export class SignUpPane {
   readonly page: Page;

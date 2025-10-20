@@ -1,60 +1,31 @@
 import { Page, Locator, FrameLocator, expect } from '@playwright/test';
 
-/**
- * Interface representing credit card information for payment processing
- * @interface Card
- */
 export interface Card {
-  /** Crucially, we need to know that the card number is correct. */
   number: string;
-  /** The name on the card. */
   name: string;
-  /** The expiry date. */
   expiry: string;
-  /** The CVC code. */
   cvc: string;
 }
 
-/**
- * Interface representing shipping or billing address information
- * @interface Address
- */
 export interface Address {
-  /** The first name of the person. */
   firstName: string;
-  /** The last name of the person. */
   lastName: string;
-  /** The first line of the address. */
   address1: string;
-  /** The city. */
   city: string;
-  /** The ZIP code. */
   zipcode: string;
-  /** The country. */
   country: string;
-  /** The state. */
   state: string;
-  /** The phone number. */
   phone: string;
 }
 
 /**
- * Page Object Model for the Checkout process in Spree Commerce
+ * CheckoutPage - Multi-step checkout process interactions
  * 
- * This class handles all interactions with the multi-step checkout process including:
- * - Contact information entry
- * - Shipping address management with autocomplete
+ * Handles:
+ * - Shipping address entry
  * - Delivery method selection
- * - Payment processing with Stripe integration
- * - Order confirmation verification
- * 
- * @class CheckoutPage
- * @example
- * ```typescript
- * const checkoutPage = new CheckoutPage(page);
- * await checkoutPage.fillShippingAddress(testAddress);
- * await checkoutPage.saveAndContinue();
- * ```
+ * - Payment processing
+ * - Order confirmation
  */
 export class CheckoutPage {
   /** Playwright Page instance for browser interactions */

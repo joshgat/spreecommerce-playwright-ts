@@ -1,5 +1,12 @@
 import { Page, Locator, expect } from '@playwright/test';
 
+/**
+ * ProductDetailPage - Product detail page interactions
+ * 
+ * Handles:
+ * - Size selection
+ * - Adding products to cart
+ */
 export class ProductDetailPage {
   readonly page: Page;
   readonly sizeDropdownButton: Locator;
