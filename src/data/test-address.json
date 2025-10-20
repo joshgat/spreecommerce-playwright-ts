@@ -1,0 +1,10 @@
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "address1": "123 Main St",
+  "city": "New York",
+  "zipcode": "10001",
+  "country": "United States",
+  "state": "New York",
+  "phone": "2125550100"
+}

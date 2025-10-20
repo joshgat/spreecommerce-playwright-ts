@@ -50,10 +50,10 @@ test('Navigate to shop', async ({ page, homePage }) => {
 ```typescript
 import { testAddress, testCard, generateRandomEmail } from './src/utils/testData';
 
-// Pre-configured test data
-const address = testAddress;
-const card = testCard;
-const email = generateRandomEmail();
+// Pre-configured test data from JSON files
+const address = testAddress;  // Loaded from src/data/test-address.json
+const card = testCard;        // Loaded from src/data/test-card.json
+const email = generateRandomEmail(); // Generated unique email
 ```
 
 ## Commands
