@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { test } from './src/fixtures';
 
 /**
  * Read environment variables from file.
@@ -41,7 +42,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         /* Slow down operations by 500ms to see what's happening */
         launchOptions: {
-          slowMo: 500,
+          slowMo: 1000,
         },
       },
     },

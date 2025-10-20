@@ -152,6 +152,7 @@ export class CheckoutPage {
   readonly paymentSubmitButton: Locator;
   readonly termsOfServiceLink: Locator;
   readonly privacyPolicyLink: Locator;
+  readonly saveInfoOptionalSection: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -239,6 +240,7 @@ export class CheckoutPage {
     this.paymentSubmitButton = page.locator('#checkout-payment-submit');
     this.termsOfServiceLink = page.locator('a[href*="/policies/terms_of_service"]');
     this.privacyPolicyLink = page.locator('a[href*="/policies/privacy_policy"]');
+    this.saveInfoOptionalSection = page.locator('.p-LinkOptIn-header:has-text("Save my information for faster checkout")');
 
     // Order confirmation
     this.orderConfirmationPage = page.locator('#checkout-page');
@@ -602,7 +604,7 @@ export class CheckoutPage {
   }
 
   async expectOrderConfirmation() {
-    await expect(this.page.getByRole('heading', { name: 'Your order is confirmed!' })).toBeVisible();
+    await expect(this.page.getByRole('heading', { name: 'Your order is confirmed!' })).toBeVisible({ timeout: 15000 });
   }
 
   /**

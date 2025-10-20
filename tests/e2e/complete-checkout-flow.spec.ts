@@ -1,11 +1,5 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../src/pages/HomePage';
-import { CheckoutPage } from '../../src/pages/CheckoutPage';
-import { CartPane } from '../../src/pages/CartPane';
-import { LoginPane } from '../../src/pages/LoginPane';
-import { SignUpPane } from '../../src/pages/SignUpPane';
-import { ProductDetailPage } from '../../src/pages/ProductDetailPage';
-import { testAddress, testCard, generateRandomEmail, validateAddress, validateCard, TEST_CONFIG } from '../../src/utils/testData';
+import { checkoutTest, expect } from '../../src/fixtures';
+import { validateAddress, validateCard } from '../../src/utils/testData';
 
 /**
  * Complete E2E Checkout Flow Test
@@ -19,19 +13,19 @@ import { testAddress, testCard, generateRandomEmail, validateAddress, validateCa
  * 
  * @description Tests the complete user journey from signup to order confirmation
  */
-test('Complete E2E Checkout Flow - User Registration to Order Confirmation', async ({ page }) => {
-  // Initialize page object models
-  const homePage = new HomePage(page);
-  const checkoutPage = new CheckoutPage(page);
-  const cartPane = new CartPane(page);
-  const loginPane = new LoginPane(page);
-  const signUpPane = new SignUpPane(page);
-  const productDetailPage = new ProductDetailPage(page);
-
-  // Generate test user credentials
-  const userEmail = generateRandomEmail();
-  const userPassword = 'TestPassword123!';
-
+checkoutTest('Complete E2E Checkout Flow - User Registration to Order Confirmation', async ({ 
+  page, 
+  homePage, 
+  checkoutPage, 
+  cartPane, 
+  loginPane, 
+  signUpPane, 
+  productDetailPage, 
+  testAddress, 
+  testCard, 
+  userEmail, 
+  userPassword 
+}) => {
   // Validate test data before starting the test
   if (!validateAddress(testAddress)) {
     throw new Error('Invalid test address data provided');
@@ -43,12 +37,11 @@ test('Complete E2E Checkout Flow - User Registration to Order Confirmation', asy
   // ===== STEP 1: Navigate to the application =====
   try {
     await page.goto('https://demo.spreecommerce.org/', { 
-      waitUntil: 'networkidle',
-      timeout: TEST_CONFIG.PAGE_LOAD_TIMEOUT 
+      waitUntil: 'networkidle'
     });
     
     // Verify the application loaded successfully
-    await expect(homePage.logo).toBeVisible({ timeout: TEST_CONFIG.ELEMENT_TIMEOUT });
+    await expect(homePage.logo).toBeVisible();
   } catch (error) {
     throw new Error(`Failed to load the application: ${error}`);
   }
@@ -56,22 +49,22 @@ test('Complete E2E Checkout Flow - User Registration to Order Confirmation', asy
   // ===== STEP 2: User Registration =====
   try {
     await homePage.openAccountMenu();
-    await expect(page.locator('#account-pane')).toBeVisible({ timeout: TEST_CONFIG.ELEMENT_TIMEOUT });
+    await expect(page.locator('#account-pane')).toBeVisible();
     await loginPane.clickSignUpLink();
     
     // Wait for sign up form to load and verify it's visible
-    await expect(page.locator('#account-pane')).toBeVisible({ timeout: TEST_CONFIG.ELEMENT_TIMEOUT });
-    await expect(signUpPane.signUpForm).toBeVisible({ timeout: TEST_CONFIG.ELEMENT_TIMEOUT });
+    await expect(page.locator('#account-pane')).toBeVisible();
+    await expect(signUpPane.signUpForm).toBeVisible();
     
     // Fill and submit the registration form
     await signUpPane.fillSignUpForm(userEmail, userPassword, userPassword);
     await signUpPane.submitSignUpForm();
     
     // Verify successful registration - wait for navigation back to home page
-    await expect(homePage.logo).toBeVisible({ timeout: TEST_CONFIG.ELEMENT_TIMEOUT });
+    await expect(homePage.logo).toBeVisible();
     
     // Verify registration success message
-    await expect(page.locator('#flashes .flash-message:has-text("Welcome! You have signed up successfully.")')).toBeVisible({ timeout: TEST_CONFIG.ELEMENT_TIMEOUT });
+    await expect(page.locator('#flashes .flash-message:has-text("Welcome! You have signed up successfully.")')).toBeVisible();
   } catch (error) {
     throw new Error(`User registration failed: ${error}`);
   }
