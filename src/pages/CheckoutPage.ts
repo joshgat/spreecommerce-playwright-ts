@@ -174,8 +174,8 @@ export class CheckoutPage {
   }
 
 
-  async selectShippingMethodByLabel(label: string) {
-    const item = this.shippingRateItems.filter({ has: this.page.getByText(label) }).first();
+  async selectStandardShipping() {
+    const item = this.shippingRateItems.filter({ has: this.page.getByText('Standard') }).first();
     await item.locator('input[type="radio"]').check();
   }
 

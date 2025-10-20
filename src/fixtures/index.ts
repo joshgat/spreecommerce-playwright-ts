@@ -4,6 +4,7 @@ import { CheckoutPage } from '../pages/CheckoutPage';
 import { CartPane } from '../pages/CartPane';
 import { LoginPane } from '../pages/LoginPane';
 import { SignUpPane } from '../pages/SignUpPane';
+import { ShopAllPage } from '../pages/ShopAllPage';
 import { ProductDetailPage } from '../pages/ProductDetailPage';
 import { testAddress, testCard, generateRandomEmail } from '../utils/testData';
 
@@ -18,6 +19,7 @@ export interface BaseFixtures {
   cartPane: CartPane;
   loginPane: LoginPane;
   signUpPane: SignUpPane;
+  shopAllPage: ShopAllPage;
   productDetailPage: ProductDetailPage;
   testAddress: typeof testAddress;
   testCard: typeof testCard;
@@ -56,6 +58,11 @@ export const test = base.extend<BaseFixtures>({
   signUpPane: async ({ page }, use) => {
     const signUpPane = new SignUpPane(page);
     await use(signUpPane);
+  },
+
+  shopAllPage: async ({ page }, use) => {
+    const shopAllPage = new ShopAllPage(page);
+    await use(shopAllPage);
   },
 
   productDetailPage: async ({ page }, use) => {

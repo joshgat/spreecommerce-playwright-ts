@@ -7,6 +7,7 @@ test('Complete E2E Checkout Flow', async ({
   cartPane, 
   loginPane,
   signUpPane, 
+  shopAllPage,
   productDetailPage, 
   testAddress, 
   testCard, 
@@ -24,19 +25,19 @@ test('Complete E2E Checkout Flow', async ({
 
   // Register new user
   await homePage.openAccountMenu();
-  await expect(page.locator('#account-pane')).toBeVisible();
+  await expect(homePage.accountPane).toBeVisible();
   await loginPane.clickSignUpLink();
   await expect(signUpPane.signUpForm).toBeVisible();
   await signUpPane.fillSignUpForm(userEmail, userPassword, userPassword);
   await signUpPane.submitSignUpForm();
   await expect(homePage.logo).toBeVisible();
-  await expect(page.locator('#flashes .flash-message:has-text("Welcome! You have signed up successfully.")')).toBeVisible();
+  await expect(homePage.successMessage).toBeVisible();
 
   // Browse and add product to cart
   await homePage.navigateToShopAll();
-  await expect(page.locator('.section-page-title:has-text("Shop All")')).toBeVisible();
-  await page.locator('.product-card a').first().click();
-  await expect(page.locator('[data-editor-name="Description"]')).toBeVisible();
+  await expect(shopAllPage.pageTitle).toBeVisible();
+  await shopAllPage.clickFirstProduct();
+  await expect(productDetailPage.descriptionSection).toBeVisible();
   await productDetailPage.selectFirstAvailableSize();
   await productDetailPage.addToCart();
   await expect(cartPane.counter).toBeVisible();
@@ -46,7 +47,7 @@ test('Complete E2E Checkout Flow', async ({
   await expect(page).toHaveURL(/.*\/checkout/);
   await checkoutPage.fillShippingAddress(testAddress);
   await checkoutPage.saveAndContinue();
-  await checkoutPage.selectShippingMethodByLabel('Standard');
+  await checkoutPage.selectStandardShipping();
   await page.waitForLoadState('networkidle');
   await checkoutPage.saveAndContinueDelivery();
   await checkoutPage.waitForPaymentFormReady();

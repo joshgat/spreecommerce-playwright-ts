@@ -10,12 +10,12 @@ import { Page, Locator, expect } from '@playwright/test';
 export class ProductDetailPage {
   readonly page: Page;
   readonly sizeDropdownButton: Locator;
-  readonly addToCartButton: Locator;
+  readonly descriptionSection: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.sizeDropdownButton = page.locator('[data-dropdown-target="button"]');
-    this.addToCartButton = page.locator('.add-to-cart-button, button[data-product-form-target="submit"]');
+    this.descriptionSection = page.locator('[data-editor-name="Description"]');
   }
 
   async selectFirstAvailableSize() {
