@@ -1,4 +1,4 @@
-import { checkoutTest, expect } from '../../src/fixtures';
+import { test, expect } from '../../src/fixtures';
 import { validateAddress, validateCard } from '../../src/utils/testData';
 
 /**
@@ -13,7 +13,7 @@ import { validateAddress, validateCard } from '../../src/utils/testData';
  * 
  * @description Tests the complete user journey from signup to order confirmation
  */
-checkoutTest('Complete E2E Checkout Flow - User Registration to Order Confirmation', async ({ 
+test('Complete E2E Checkout Flow - User Registration to Order Confirmation', async ({ 
   page, 
   homePage, 
   checkoutPage, 
@@ -23,9 +23,11 @@ checkoutTest('Complete E2E Checkout Flow - User Registration to Order Confirmati
   productDetailPage, 
   testAddress, 
   testCard, 
-  userEmail, 
-  userPassword 
+  generateRandomEmail 
 }) => {
+  // Generate unique credentials for this test
+  const userEmail = generateRandomEmail();
+  const userPassword = 'TestPassword123!';
   // Validate test data before starting the test
   if (!validateAddress(testAddress)) {
     throw new Error('Invalid test address data provided');

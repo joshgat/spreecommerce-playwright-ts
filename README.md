@@ -1,34 +1,69 @@
-# spreecommerce-playwright-ts
-Sample Test Automation Framework for Spree Commerce Website https://demo.spreecommerce.org/
+# SpreeCommerce Playwright TypeScript Framework
 
-## Features
+End-to-end test automation framework for [SpreeCommerce demo](https://demo.spreecommerce.org/) built with Playwright and TypeScript.
 
-- **Playwright Fixtures**: Simplified test writing with dependency injection
-- **Page Object Model**: Clean, maintainable page objects
-- **TypeScript Support**: Full type safety throughout
-- **E2E Test Coverage**: Complete checkout flow testing
-- **Modern Test Structure**: Organized, readable test files
+## Quick Start
 
-## Commands
+```bash
+# Install dependencies
+npm ci
 
-- Install deps: `npm ci`
-- Run tests: `npm test`
-- Open UI Mode: `npm run test:ui`
-- Show last report: `npm run report`
+# Install Playwright browsers
+npx playwright install
 
-## Fixtures Usage
+# Run tests
+npm test
 
-This project uses Playwright fixtures to simplify test writing. Instead of manually instantiating page objects, you can inject them directly:
+# Run with UI
+npm run test:ui
+```
+
+## Writing Tests
+
+Use the provided fixtures for easy test writing:
 
 ```typescript
 import { test, expect } from './src/fixtures';
 
-test('My test', async ({ page, homePage, checkoutPage, cartPane }) => {
-  // All page objects are ready to use!
+test('Navigate to shop', async ({ page, homePage }) => {
   await page.goto('/');
   await homePage.navigateToShopAll();
-  // ... rest of your test
+  await expect(page.locator('.section-page-title')).toContainText('Shop All');
 });
 ```
 
-See [src/fixtures/README.md](src/fixtures/README.md) for detailed documentation.
+### Available Fixtures
+
+- **`test`**: All page objects and utilities available
+
+### Page Objects
+
+- `homePage` - Main navigation
+- `checkoutPage` - Checkout flow
+- `cartPane` - Shopping cart
+- `loginPane` - User login
+- `signUpPane` - User registration
+- `productDetailPage` - Product details
+
+### Test Data
+
+```typescript
+import { testAddress, testCard, generateRandomEmail } from './src/utils/testData';
+
+// Pre-configured test data
+const address = testAddress;
+const card = testCard;
+const email = generateRandomEmail();
+```
+
+## Commands
+
+- `npm test` - Run all tests
+- `npm run test:ui` - Interactive UI mode
+- `npm run test:headed` - Run with visible browser
+- `npm run test:debug` - Debug mode
+- `npm run report` - Show test report
+
+## CI/CD
+
+GitHub Actions automatically runs tests on push/PR to `main` or `develop` branches. Test reports are uploaded as artifacts.

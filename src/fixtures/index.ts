@@ -24,13 +24,6 @@ export interface BaseFixtures {
   generateRandomEmail: typeof generateRandomEmail;
 }
 
-/**
- * Checkout-specific fixtures for checkout flow testing
- */
-export interface CheckoutFixtures extends BaseFixtures {
-  userEmail: string;
-  userPassword: string;
-}
 
 /**
  * Base test with all page objects and utilities
@@ -83,18 +76,5 @@ export const test = base.extend<BaseFixtures>({
   },
 });
 
-/**
- * Checkout test with user credentials
- */
-export const checkoutTest = test.extend<CheckoutFixtures>({
-  userEmail: async ({ generateRandomEmail }, use) => {
-    const email = generateRandomEmail();
-    await use(email);
-  },
-
-  userPassword: async ({}, use) => {
-    await use('TestPassword123!');
-  },
-});
 
 export { expect } from '@playwright/test';

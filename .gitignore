@@ -143,9 +143,7 @@ playwright-report/
 test-results/
 blob-report/
 playwright/.cache/
+playwright/.auth/
 
-# Playwright
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
+# CI/CD artifacts
+.github/workflows/*.log
