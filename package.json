@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Sample Test Automation Framework for Spree Commerce Website https://demo.spreecommerce.org/",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joshgat/spreecommerce-playwright-ts.git"
